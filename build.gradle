@@ -1,6 +1,11 @@
+import static java.util.Calendar.*
+
 apply plugin: 'java'
 apply plugin: 'application'
 
+task helloWorld << {
+    println 'Hello World.'
+}
 mainClassName = 'hello.Jalapeno'
 
 
@@ -20,4 +25,23 @@ dependencies {
 
 task  wrapper(type: Wrapper) {
     gradleVersion = '2.0'
+}
+
+task numbers << {
+    (1..4).each { number ->
+        def sq = number * number
+        println "sq of ${it} = ${sq}"
+    }
+}
+
+task longrunning {
+    onlyIf { task ->
+        def now = Calendar.instance
+        def weekDay = now[DAY_OF_WEEK]
+        def weekDayInWeekend = weekDay in [TUESDAY, SATURDAY, SUNDAY]
+        return weekDayInWeekend
+    }
+    doLast {
+        println "Do long running stuff"
+    }
 }

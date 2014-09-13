@@ -1,9 +1,7 @@
 package hello;
 
 import org.joda.time.LocalTime;
-
 public class Jalapeno {
-
     private String jalapeno;
     
     Jalapeno (String jalapeno) {
